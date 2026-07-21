@@ -733,18 +733,194 @@ a {
 }
 
 @media (max-width: 640px) {
+  html {
+    font-size: 18px;
+  }
+
   .header-actions .btn-ghost {
     display: none;
   }
+
+  .logo-img {
+    height: 40px;
+  }
+
+  .btn {
+    padding: 13px 20px;
+    font-size: 0.95rem;
+  }
+
+  .btn-small {
+    padding: 11px 16px;
+    font-size: 0.9rem;
+  }
+
+  .btn-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ticker-item {
+    font-size: 0.78rem;
+  }
+
   .hero {
-    padding: 44px 0 30px;
+    padding: 40px 0 32px;
   }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+  }
+
+  .hero-stats {
+    gap: 24px;
+  }
+
+  .hero-stat strong {
+    font-size: 1.7rem;
+  }
+
+  .hero-stat span {
+    font-size: 0.85rem;
+  }
+
   .filters {
-    top: 60px;
+    top: 66px;
   }
+
+  .search-box input {
+    padding: 13px 16px 13px 42px;
+    font-size: 1rem;
+  }
+
+  .search-box svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .chip {
+    padding: 11px 18px;
+    font-size: 0.85rem;
+  }
+
+  .sort-select {
+    padding: 12px 16px;
+    font-size: 0.85rem;
+  }
+
+  .catalog-count {
+    font-size: 0.88rem;
+  }
+
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .product-card {
+    padding: 20px;
+  }
+
+  .product-media {
+    height: 180px;
+  }
+
+  .phone-illustration {
+    width: 88px;
+    height: 158px;
+  }
+
+  .phone-illustration.accessory {
+    width: 74px;
+    height: 74px;
+  }
+
+  .badge {
+    font-size: 0.72rem;
+    padding: 5px 10px;
+  }
+
+  .product-title {
+    font-size: 1.15rem;
+  }
+
+  .product-meta {
+    font-size: 0.92rem;
+  }
+
+  .product-price {
+    font-size: 1.3rem;
+  }
+
+  .product-old-price {
+    font-size: 0.9rem;
+  }
+
+  .modal {
+    padding: 24px;
+  }
+
+  .modal h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-specs {
+    font-size: 1rem;
+  }
+
+  .modal-price {
+    font-size: 1.7rem;
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+
+  .section h2 {
+    font-size: 1.7rem;
+  }
+
+  .section p {
+    font-size: 1.02rem;
+  }
+
+  .info-card {
+    padding: 24px;
+  }
+
+  .info-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .info-card p {
+    font-size: 0.95rem;
+  }
+
+  .site-footer {
+    font-size: 0.9rem;
+  }
+
   .site-footer .container {
     justify-content: center;
     text-align: center;
+  }
+
+  .float-whatsapp {
+    width: 62px;
+    height: 62px;
+  }
+
+  .float-whatsapp svg {
+    width: 30px;
+    height: 30px;
   }
 }
 
