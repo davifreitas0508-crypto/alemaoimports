@@ -15,8 +15,8 @@ const conditionChips = document.querySelectorAll("[data-condition]");
 const sortSelect = document.getElementById("sort-select");
 const modalOverlay = document.getElementById("modal-overlay");
 const modalBody = document.getElementById("modal-body");
-const categoryToggle = document.getElementById("category-toggle");
-const categoryChipsWrap = document.getElementById("category-chips");
+const filtersToggle = document.getElementById("filters-toggle");
+const filtersPanel = document.getElementById("filters-panel");
 
 function formatPrice(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -131,30 +131,20 @@ searchInput.addEventListener("input", (e) => {
   render();
 });
 
-function updateCategoryToggleLabel() {
-  if (!categoryToggle) return;
-  const active = document.querySelector("[data-category].active");
-  categoryToggle.querySelector(".filter-toggle-label").textContent = active ? active.textContent : "Categoria";
-}
-
 categoryChips.forEach((chip) => {
   chip.addEventListener("click", () => {
     categoryChips.forEach((c) => c.classList.remove("active"));
     chip.classList.add("active");
     state.category = chip.dataset.category;
-    updateCategoryToggleLabel();
-    if (categoryChipsWrap) categoryChipsWrap.classList.remove("open");
-    if (categoryToggle) categoryToggle.setAttribute("aria-expanded", "false");
     render();
   });
 });
 
-if (categoryToggle && categoryChipsWrap) {
-  categoryToggle.addEventListener("click", () => {
-    const isOpen = categoryChipsWrap.classList.toggle("open");
-    categoryToggle.setAttribute("aria-expanded", String(isOpen));
+if (filtersToggle && filtersPanel) {
+  filtersToggle.addEventListener("click", () => {
+    const isOpen = filtersPanel.classList.toggle("open");
+    filtersToggle.setAttribute("aria-expanded", String(isOpen));
   });
-  updateCategoryToggleLabel();
 }
 
 conditionChips.forEach((chip) => {
