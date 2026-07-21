@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = "5531900000000"; // TODO: substituir pelo número real (formato 55DDDNÚMERO)
+const WHATSAPP_NUMBER = "5531990674033";
 
 const state = {
   search: "",
@@ -15,6 +15,8 @@ const conditionChips = document.querySelectorAll("[data-condition]");
 const sortSelect = document.getElementById("sort-select");
 const modalOverlay = document.getElementById("modal-overlay");
 const modalBody = document.getElementById("modal-body");
+const categoryToggle = document.getElementById("category-toggle");
+const categoryChipsWrap = document.getElementById("category-chips");
 
 function formatPrice(value) {
   return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
@@ -129,14 +131,31 @@ searchInput.addEventListener("input", (e) => {
   render();
 });
 
+function updateCategoryToggleLabel() {
+  if (!categoryToggle) return;
+  const active = document.querySelector("[data-category].active");
+  categoryToggle.querySelector(".filter-toggle-label").textContent = active ? active.textContent : "Categoria";
+}
+
 categoryChips.forEach((chip) => {
   chip.addEventListener("click", () => {
     categoryChips.forEach((c) => c.classList.remove("active"));
     chip.classList.add("active");
     state.category = chip.dataset.category;
+    updateCategoryToggleLabel();
+    if (categoryChipsWrap) categoryChipsWrap.classList.remove("open");
+    if (categoryToggle) categoryToggle.setAttribute("aria-expanded", "false");
     render();
   });
 });
+
+if (categoryToggle && categoryChipsWrap) {
+  categoryToggle.addEventListener("click", () => {
+    const isOpen = categoryChipsWrap.classList.toggle("open");
+    categoryToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+  updateCategoryToggleLabel();
+}
 
 conditionChips.forEach((chip) => {
   chip.addEventListener("click", () => {
@@ -170,7 +189,7 @@ function initTicker() {
     "Entrega em BH",
     "Seminovos revisados",
     "Pix com desconto",
-    "+500 aparelhos vendidos",
+    "+10.000 aparelhos vendidos",
     "Avaliamos seu usado",
   ];
   const html = items.map((item) => `<span class="ticker-item">${item}</span>`).join("");
@@ -191,7 +210,7 @@ function animateCount(el) {
   function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
-    el.textContent = `${prefix}${Math.round(eased * target)}${suffix}`;
+    el.textContent = `${prefix}${Math.round(eased * target).toLocaleString("pt-BR")}${suffix}`;
     if (progress < 1) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);

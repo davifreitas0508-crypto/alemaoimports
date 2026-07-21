@@ -46,8 +46,9 @@
           <a class="btn btn-ghost" href="#catalogo">Ver catálogo</a>
         </div>
         <div class="hero-stats">
-          <div class="hero-stat"><strong data-count="500" data-prefix="+">0</strong><span>aparelhos vendidos</span></div>
-          <div class="hero-stat"><strong data-count="90" data-suffix=" dias">0</strong><span>de garantia</span></div>
+          <div class="hero-stat"><strong data-count="10000" data-prefix="+">0</strong><span>aparelhos vendidos</span></div>
+          <div class="hero-stat"><strong data-count="90" data-suffix=" dias">0</strong><span>de garantia nos seminovos</span></div>
+          <div class="hero-stat"><strong>1 ano</strong><span>garantia Apple nos lacrados</span></div>
           <div class="hero-stat"><strong>BH</strong><span>entrega e retirada</span></div>
         </div>
       </div>
@@ -60,7 +61,11 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
             <input type="text" id="search-input" placeholder="Buscar por modelo, cor, memória..." />
           </div>
-          <div class="chip-group">
+          <button class="chip filter-toggle" id="category-toggle" type="button" aria-expanded="false" aria-controls="category-chips">
+            <span class="filter-toggle-label">Todos</span>
+            <svg class="filter-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="chip-group" id="category-chips">
             <button class="chip active" data-category="todos">Todos</button>
             <button class="chip" data-category="iphone">iPhones</button>
             <button class="chip" data-category="acessorio">Acessórios</button>
@@ -97,7 +102,7 @@
           </div>
           <div class="info-card">
             <h3>Pagamento facilitado</h3>
-            <p>Cartão em até 12x, PIX com desconto e entrada + parcelamento no seminovo.</p>
+            <p>Cartão em até 12x, PIX com desconto e parcelamento no cartão com taxa.</p>
           </div>
           <div class="info-card">
             <h3>Avaliamos seu aparelho</h3>
@@ -113,16 +118,12 @@
         <p>Atendimento em Belo Horizonte, com opção de retirada em loja ou entrega combinada pelo WhatsApp.</p>
         <div class="info-grid">
           <div class="info-card">
-            <h3>Endereço</h3>
-            <p>Belo Horizonte - MG<br />（endereço a confirmar）</p>
-          </div>
-          <div class="info-card">
             <h3>Horário de atendimento</h3>
-            <p>Segunda a sábado, 9h às 19h</p>
+            <p>Domingo a domingo, das 10h às 20h</p>
           </div>
           <div class="info-card">
             <h3>Contato</h3>
-            <p>WhatsApp: (31) 90000-0000<br />Instagram: @alemaoimportados</p>
+            <p>WhatsApp: (31) 99067-4033<br />Instagram: @alemao_importados</p>
           </div>
         </div>
       </div>
@@ -133,8 +134,8 @@
     <div class="container" style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;width:100%">
       <span>© 2026 Alemão Importados. Todos os direitos reservados.</span>
       <span class="footer-social">
-        <a href="#" target="_blank" rel="noopener">Instagram</a>
-        <a href="#" target="_blank" rel="noopener">WhatsApp</a>
+        <a href="https://www.instagram.com/alemao_importados" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://wa.me/5531990674033" target="_blank" rel="noopener">WhatsApp</a>
       </span>
     </div>
   </footer>
