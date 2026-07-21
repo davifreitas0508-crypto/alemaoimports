@@ -54,12 +54,12 @@ function sortProducts(list) {
   return sorted;
 }
 
-function renderCard(p) {
+function renderCard(p, index) {
   const badges = p.badges.map((b) => `<span class="${badgeClass(b)}">${b}</span>`).join("");
   const oldPrice = p.oldPrice ? `<span class="product-old-price">${formatPrice(p.oldPrice)}</span>` : "";
   const batteryLine = p.battery ? ` · Bateria ${p.battery}` : "";
   return `
-    <article class="product-card" data-id="${p.id}">
+    <article class="product-card" data-id="${p.id}" style="--i:${index}" tabindex="0">
       <div class="product-media">${phoneIllustration(p)}</div>
       <div class="product-badges">${badges}</div>
       <h3 class="product-title">${p.model}</h3>
@@ -84,9 +84,15 @@ function render() {
     return;
   }
 
-  grid.innerHTML = filtered.map(renderCard).join("");
+  grid.innerHTML = filtered.map((p, i) => renderCard(p, i)).join("");
   grid.querySelectorAll(".product-card").forEach((card) => {
     card.addEventListener("click", () => openModal(card.dataset.id));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        openModal(card.dataset.id);
+      }
+    });
   });
 }
 
@@ -153,5 +159,133 @@ document.getElementById("modal-close").addEventListener("click", closeModal);
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") closeModal();
 });
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Ticker: trust signals scrolling strip (duplicated once for a seamless loop)
+function initTicker() {
+  const track = document.getElementById("ticker-track");
+  const items = [
+    "Garantia Apple",
+    "Entrega em BH",
+    "Seminovos revisados",
+    "Pix com desconto",
+    "+500 aparelhos vendidos",
+    "Avaliamos seu usado",
+  ];
+  const html = items.map((item) => `<span class="ticker-item">${item}</span>`).join("");
+  track.innerHTML = html + html;
+}
+
+// Contagem animada dos números do hero
+function animateCount(el) {
+  const target = Number(el.dataset.count);
+  const prefix = el.dataset.prefix || "";
+  const suffix = el.dataset.suffix || "";
+  if (prefersReducedMotion) {
+    el.textContent = `${prefix}${target}${suffix}`;
+    return;
+  }
+  const duration = 1100;
+  const start = performance.now();
+  function tick(now) {
+    const progress = Math.min((now - start) / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = `${prefix}${Math.round(eased * target)}${suffix}`;
+    if (progress < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// Fade-in ao rolar para os cartões "info-card"
+function initRevealOnScroll() {
+  const targets = document.querySelectorAll(".info-card");
+  if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+    targets.forEach((el) => el.classList.add("reveal-visible"));
+    return;
+  }
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("reveal-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+  targets.forEach((el) => observer.observe(el));
+}
+
+// Rede de partículas animada no fundo do hero (efeito "tech")
+function initHeroCanvas() {
+  const canvas = document.getElementById("hero-canvas");
+  const ctx = canvas.getContext("2d");
+  const hero = canvas.closest(".hero");
+  let width, height, particles;
+
+  function resize() {
+    width = canvas.width = hero.clientWidth;
+    height = canvas.height = hero.clientHeight;
+  }
+
+  function createParticles() {
+    const count = Math.min(60, Math.round((width * height) / 18000));
+    particles = Array.from({ length: count }, () => ({
+      x: Math.random() * width,
+      y: Math.random() * height,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+    }));
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, width, height);
+    particles.forEach((p) => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0 || p.x > width) p.vx *= -1;
+      if (p.y < 0 || p.y > height) p.vy *= -1;
+    });
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const a = particles[i];
+        const b = particles[j];
+        const dist = Math.hypot(a.x - b.x, a.y - b.y);
+        if (dist < 140) {
+          ctx.strokeStyle = `rgba(10, 10, 10, ${0.09 * (1 - dist / 140)})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+    particles.forEach((p) => {
+      ctx.fillStyle = "rgba(10, 10, 10, 0.35)";
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    if (!prefersReducedMotion) requestAnimationFrame(step);
+  }
+
+  resize();
+  createParticles();
+  step();
+
+  window.addEventListener("resize", () => {
+    resize();
+    createParticles();
+    if (prefersReducedMotion) step();
+  });
+}
+
+initTicker();
+initRevealOnScroll();
+initHeroCanvas();
+document.querySelectorAll("[data-count]").forEach(animateCount);
 
 render();
