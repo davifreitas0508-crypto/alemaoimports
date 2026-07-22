@@ -40,6 +40,13 @@ function phoneIllustration(product) {
   return `<div class="phone-illustration${isAccessory ? " accessory" : ""}" style="background:${product.colorHex}"></div>`;
 }
 
+function productMedia(product) {
+  if (product.image) {
+    return `<img class="product-photo" src="${product.image}" alt="${product.model} ${product.color}" loading="lazy" />`;
+  }
+  return phoneIllustration(product);
+}
+
 function matchesFilters(p) {
   const q = state.search.trim().toLowerCase();
   const searchable = `${p.model} ${p.memory} ${p.color}`.toLowerCase();
@@ -62,7 +69,7 @@ function renderCard(p, index) {
   const batteryLine = p.battery ? ` · Bateria ${p.battery}` : "";
   return `
     <article class="product-card" data-id="${p.id}" style="--i:${index}" tabindex="0">
-      <div class="product-media">${phoneIllustration(p)}</div>
+      <div class="product-media">${productMedia(p)}</div>
       <div class="product-badges">${badges}</div>
       <h3 class="product-title">${p.model}</h3>
       <div class="product-meta">${p.memory} · ${p.color}${batteryLine}</div>
@@ -107,7 +114,7 @@ function openModal(id) {
   const batteryRow = p.battery ? `<li><strong>Bateria:</strong> ${p.battery}</li>` : "";
 
   modalBody.innerHTML = `
-    <div class="modal-media">${phoneIllustration(p)}</div>
+    <div class="modal-media">${productMedia(p)}</div>
     <div class="product-badges">${badges}</div>
     <h2>${p.model}</h2>
     <ul class="modal-specs">

@@ -3,6 +3,20 @@
 // condition: "novo" | "seminovo"
 const PRODUCTS = [
   {
+    id: "ip17-pm-256-laranja",
+    category: "iphone",
+    model: "iPhone 17 Pro Max",
+    memory: "256GB",
+    color: "Laranja",
+    colorHex: "#c1622a",
+    condition: "novo",
+    battery: null,
+    price: 11499, // TODO: confirmar preço real
+    oldPrice: null,
+    badges: ["Lacrado", "Garantia Apple"],
+    image: "assets/img/products/iphone-17-pro-max-laranja.jpg",
+  },
+  {
     id: "ip16-pm-256-titnat",
     category: "iphone",
     model: "iPhone 16 Pro Max",
