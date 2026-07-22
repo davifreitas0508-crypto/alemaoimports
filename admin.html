@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Painel Admin | Alemão Importados</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <header class="admin-header">
+    <div class="admin-header-inner">
+      <img class="logo-img" src="assets/img/logo.png" alt="Alemão Importados" />
+      <span class="admin-badge">Painel Admin</span>
+      <button class="btn btn-ghost admin-logout" id="logout-btn" hidden>Sair</button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <!-- Login -->
+    <section class="admin-login" id="login-section">
+      <form class="admin-login-card" id="login-form">
+        <h1>Entrar</h1>
+        <p>Acesso restrito à equipe da Alemão Importados.</p>
+        <label>
+          E-mail
+          <input type="email" id="login-email" required autocomplete="username" />
+        </label>
+        <label>
+          Senha
+          <input type="password" id="login-password" required autocomplete="current-password" />
+        </label>
+        <button class="btn btn-primary" type="submit">Entrar</button>
+        <p class="admin-login-error" id="login-error" hidden></p>
+      </form>
+    </section>
+
+    <!-- Painel -->
+    <section class="admin-panel" id="panel-section" hidden>
+      <div class="admin-toolbar">
+        <div>
+          <h1>Produtos</h1>
+          <p id="admin-count"></p>
+        </div>
+        <button class="btn btn-primary" id="new-product-btn">+ Adicionar produto</button>
+      </div>
+
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Foto</th>
+              <th>Produto</th>
+              <th>Condição</th>
+              <th>Preço</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="admin-table-body"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <!-- Modal de adicionar/editar produto -->
+  <div class="admin-modal-overlay" id="product-modal-overlay">
+    <div class="admin-modal">
+      <button class="modal-close" id="product-modal-close" aria-label="Fechar">&times;</button>
+      <h2 id="product-modal-title">Adicionar produto</h2>
+      <form id="product-form" class="admin-form">
+        <input type="hidden" id="field-id" />
+
+        <div class="admin-form-row">
+          <label>
+            Categoria
+            <select id="field-category">
+              <option value="iphone">iPhone</option>
+              <option value="acessorio">Acessório</option>
+            </select>
+          </label>
+          <label>
+            Condição
+            <select id="field-condition">
+              <option value="novo">Novo</option>
+              <option value="seminovo">Seminovo</option>
+            </select>
+          </label>
+        </div>
+
+        <label>
+          Modelo
+          <input type="text" id="field-model" placeholder="Ex: iPhone 16 Pro Max" required />
+        </label>
+
+        <div class="admin-form-row">
+          <label>
+            Armazenamento
+            <input type="text" id="field-memory" placeholder="Ex: 256GB" required />
+          </label>
+          <label>
+            Cor
+            <input type="text" id="field-color" placeholder="Ex: Titânio Natural" required />
+          </label>
+        </div>
+
+        <div class="admin-form-row">
+          <label>
+            Cor da ilustração (sem foto)
+            <input type="color" id="field-colorhex" value="#1c1c1e" />
+          </label>
+          <label>
+            Bateria (opcional)
+            <input type="text" id="field-battery" placeholder="Ex: 92% ou 100%" />
+          </label>
+        </div>
+
+        <div class="admin-form-row">
+          <label>
+            Preço (R$)
+            <input type="number" id="field-price" step="0.01" min="0" required />
+          </label>
+          <label>
+            Preço antigo (opcional)
+            <input type="number" id="field-oldprice" step="0.01" min="0" />
+          </label>
+        </div>
+
+        <label>
+          Selos (separados por vírgula)
+          <input type="text" id="field-badges" placeholder="Ex: Lacrado, Garantia Apple" />
+        </label>
+
+        <label>
+          Fotos do produto
+          <input type="file" id="field-images" accept="image/*" multiple />
+        </label>
+        <div class="admin-image-list" id="admin-image-list"></div>
+
+        <p class="admin-form-error" id="product-form-error" hidden></p>
+
+        <div class="admin-form-actions">
+          <button type="button" class="btn btn-ghost" id="delete-product-btn" hidden>Excluir produto</button>
+          <button type="submit" class="btn btn-primary" id="save-product-btn">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/supabase-products.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

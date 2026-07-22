@@ -1,5 +1,7 @@
 const WHATSAPP_NUMBER = "5531990674033";
 
+let PRODUCTS = [];
+
 const state = {
   search: "",
   category: "todos",
@@ -304,4 +306,10 @@ initRevealOnScroll();
 initHeroCanvas();
 document.querySelectorAll("[data-count]").forEach(animateCount);
 
-render();
+async function init() {
+  countEl.textContent = "Carregando produtos...";
+  PRODUCTS = await loadProducts();
+  render();
+}
+
+init();

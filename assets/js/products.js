@@ -1,7 +1,8 @@
-// Catálogo de exemplo — edite/adicione produtos aqui.
+// Catálogo usado apenas como fallback caso o Supabase esteja indisponível.
+// A fonte real dos produtos é o banco (tabela "products"); edite pelo painel /admin.html.
 // category: "iphone" | "acessorio"
 // condition: "novo" | "seminovo"
-const PRODUCTS = [
+const PRODUCTS_FALLBACK = [
   {
     id: "ip17-pm-256-laranja",
     category: "iphone",
