@@ -41,8 +41,8 @@ function phoneIllustration(product) {
 }
 
 function productMedia(product) {
-  if (product.image) {
-    return `<img class="product-photo" src="${product.image}" alt="${product.model} ${product.color}" loading="lazy" />`;
+  if (product.images && product.images.length) {
+    return `<img class="product-photo" src="${product.images[0]}" alt="${product.model} ${product.color}" loading="lazy" />`;
   }
   return phoneIllustration(product);
 }
