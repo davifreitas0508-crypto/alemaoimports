@@ -12,15 +12,7 @@ Site institucional estático (HTML/CSS/JS puro, sem build) para agendamento de c
 
 ## Foto da Dra. Amanda
 
-O arquivo `assets/img/dra-amanda.jpg` ainda não foi adicionado (não havia acesso ao anexo original no momento da criação do site). Enquanto isso, um placeholder ilustrativo (`dra-amanda-placeholder.svg`) é exibido automaticamente.
-
-Para usar a foto real, basta salvar a imagem em:
-
-```
-dra-amanda-batista/assets/img/dra-amanda.jpg
-```
-
-O site detecta o arquivo automaticamente (o placeholder só aparece se `dra-amanda.jpg` não existir).
+A foto oficial está em `assets/img/dra-amanda.png`, usada no hero e na seção "Sobre". O placeholder ilustrativo (`dra-amanda-placeholder.svg`) só é exibido como fallback caso esse arquivo seja removido.
 
 ## Configurar o WhatsApp
 
