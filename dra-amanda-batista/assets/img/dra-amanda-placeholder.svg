@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#3d0f14"/>
+      <stop offset="100%" stop-color="#5c1a21"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <circle cx="200" cy="190" r="70" fill="#cfa15e" opacity="0.18"/>
+  <circle cx="200" cy="180" r="55" fill="#e8cd9a" opacity="0.35"/>
+  <path d="M110 420c10-70 60-110 90-110s80 40 90 110" fill="#e8cd9a" opacity="0.25"/>
+  <text x="200" y="470" font-family="Georgia, serif" font-style="italic" font-size="26" fill="#e8cd9a" text-anchor="middle">Dra. Amanda Batista</text>
+</svg>
